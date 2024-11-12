@@ -188,7 +188,7 @@ class NetworkExceptions {
         errorMessage = "Connection Timeout";
         break;
       case NetworkException.noInternetConnection:
-        errorMessage = "No internet connection";
+        errorMessage = "No internet connection, please check your connection";
         break;
       case NetworkException.conflict:
         errorMessage = "Error due to a conflict";

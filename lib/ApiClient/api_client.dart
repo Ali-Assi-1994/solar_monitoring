@@ -3,7 +3,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:solar_monitoring/utils/widgets/app_snackbar.dart';
 
 import 'api.dart';
 
@@ -20,8 +22,7 @@ class ApiClient {
 
   initDio() {
     BaseOptions options = BaseOptions(
-      baseUrl: 'http://localhost/',
-      //FlavorConfig.instance!.baseUrl,
+      baseUrl: 'http://localhost:3000',
       contentType: 'application/json',
       followRedirects: false,
       validateStatus: (status) {
@@ -56,7 +57,12 @@ class ApiClient {
   }
 
   /// post methods is not used in this project, but added as an example
-  Future<ApiResult> post({required String url, var data, StreamController<double>? uploadingStream, CancelToken? cancelToken}) async {
+  Future<ApiResult> post({
+    required String url,
+    var data,
+    StreamController<double>? uploadingStream,
+    CancelToken? cancelToken,
+  }) async {
     try {
       final response = await _dio.post(_dio.options.baseUrl + url, data: data, onSendProgress: (rcv, total) {
         if (uploadingStream != null) {
@@ -64,9 +70,9 @@ class ApiClient {
         }
       }, cancelToken: cancelToken).timeout(const Duration(minutes: 15));
       if (response.statusCode == 200) {
-        return ApiResult.successFromJson(response.data);
+        return ApiResult.success(response.data);
       } else {
-        return ApiResult.failureFromJson(response.data);
+        return ApiResult.failure(response.data);
       }
     } catch (e) {
       return ApiResult.failure(NetworkExceptions.getErrorMessage(e));
@@ -88,12 +94,15 @@ class ApiClient {
           )
           .timeout(const Duration(seconds: 15));
       if (response.statusCode == 200) {
-        return ApiResult.successFromJson(response.data);
+        return ApiResult.success(response.data);
       } else {
-        return ApiResult.failureFromJson(response.data);
+        AppSnackBar().showSnackBar(text: response.statusMessage, color: Colors.red);
+        return ApiResult.failure(response.statusMessage);
       }
     } catch (e) {
-      return ApiResult.failure(NetworkExceptions.getErrorMessage(e));
+      String errorMsg = NetworkExceptions.getErrorMessage(e);
+      AppSnackBar().showSnackBar(text: errorMsg, color: Colors.red);
+      return ApiResult.failure(errorMsg);
     }
   }
 }
