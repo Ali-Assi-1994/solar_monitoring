@@ -11,7 +11,7 @@ extension DoubleToHourFormat on double {
     return '${hours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
   }
 
-  String get formatDoubleValue => this % 1 == 0 ? toStringAsFixed(0) : toString();
+  String get formatDoubleValue => this % 1 == 0 ? toStringAsFixed(1) : toStringAsFixed(1);
 }
 
 extension WattConversion on List<FlSpot> {

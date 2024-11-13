@@ -15,7 +15,7 @@ class CustomDatePicker {
 
   Future<DateTime?> openDatePicker() async {
     final platform = Theme.of(context).platform;
-    pickedDateTime = platform == TargetPlatform.iOS ? await showAndroidDatePicker() : await showIOSDatePicker();
+    pickedDateTime = platform == TargetPlatform.android ? await showAndroidDatePicker() : await showIOSDatePicker();
     return pickedDateTime;
   }
 
@@ -54,30 +54,32 @@ class CustomDatePicker {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: WidgetStateProperty.all(11),
-                          fixedSize: WidgetStateProperty.all(const Size.fromHeight(12)),
-                          backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
-                          shape: WidgetStateProperty.all(
-                            ContinuousRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          splashFactory: NoSplash.splashFactory,
-                        ),
-                        onPressed: () async {
-                          currentDate ??= preSelectedDate;
-                          selectedDate = currentDate;
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          "Select",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                color: Colors.white,
-                                fontSize: 14,
+                      Center(
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            elevation: WidgetStateProperty.all(11),
+                            fixedSize: WidgetStateProperty.all(const Size.fromHeight(12)),
+                            backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.primary),
+                            shape: WidgetStateProperty.all(
+                              ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                            ),
+                            splashFactory: NoSplash.splashFactory,
+                          ),
+                          onPressed: () async {
+                            currentDate ??= preSelectedDate;
+                            selectedDate = currentDate;
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(
+                            "Select",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 20),

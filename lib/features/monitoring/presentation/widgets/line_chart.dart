@@ -118,18 +118,18 @@ class LineChartWidget extends ConsumerWidget {
                   gridData: const FlGridData(show: false),
                   borderData: FlBorderData(
                     show: true,
-                    border: const Border(
+                    border: Border(
                       bottom: BorderSide(
                         width: 1.0,
                         style: BorderStyle.solid,
                         strokeAlign: BorderSide.strokeAlignInside,
-                        color: AppColors.borderColor,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       left: BorderSide(
                         width: 1.0,
                         style: BorderStyle.solid,
                         strokeAlign: BorderSide.strokeAlignInside,
-                        color: AppColors.borderColor,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   ),

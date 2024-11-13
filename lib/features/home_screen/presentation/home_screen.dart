@@ -121,19 +121,23 @@ class DatePicker extends ConsumerWidget {
         ),
         const SizedBox(width: 8),
         InkWell(
-            onTap: () async {
-              DateTime? selectedDateFromPicker = await CustomDatePicker(
-                context: context,
-                minimumDate: minimumDate,
-                maximumDate: DateTime.now(),
-                preSelectedDate: ref.watch(selectedDateProvider),
-              ).openDatePicker();
+          onTap: () async {
+            DateTime? selectedDateFromPicker = await CustomDatePicker(
+              context: context,
+              minimumDate: minimumDate,
+              maximumDate: DateTime.now(),
+              preSelectedDate: ref.watch(selectedDateProvider),
+            ).openDatePicker();
 
-              if (selectedDateFromPicker != null) {
-                ref.read(selectedDateProvider.notifier).updateDay(selectedDateFromPicker);
-              }
-            },
-            child: Text(DateFormat('yyyy.MM.dd').format(ref.watch(selectedDateProvider)))),
+            if (selectedDateFromPicker != null) {
+              ref.read(selectedDateProvider.notifier).updateDay(selectedDateFromPicker);
+            }
+          },
+          child: Text(
+            DateFormat('yyyy.MM.dd').format(ref.watch(selectedDateProvider)),
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+          ),
+        ),
         const SizedBox(width: 8),
         IconButton(
           icon: const Icon(Icons.chevron_right),
