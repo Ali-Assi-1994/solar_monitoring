@@ -153,7 +153,6 @@ void main() {
       expect(find.byType(CircularProgressIndicator), findsNothing);
 
       // Tap the refresh button
-      print('Assi before tap');
       await tester.tap(find.byIcon(Icons.refresh));
       await tester.pump(); // Begin the loading state
 

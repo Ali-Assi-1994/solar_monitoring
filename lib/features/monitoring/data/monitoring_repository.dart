@@ -22,8 +22,6 @@ class MonitoringRepository {
       await Future.delayed(const Duration(seconds: 1));
       return List<MonitoringModel>.from(result.data.map((x) => MonitoringModel.fromJson(x)));
     } else {
-      print("Assi message: ${result.message}");
-      print("Assi errorMessage: ${result.errorMessage}");
       throw result.errorMessage;
     }
   }
