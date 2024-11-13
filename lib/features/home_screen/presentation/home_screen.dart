@@ -9,6 +9,7 @@ import 'package:solar_monitoring/features/monitoring/presentation/house_consumpt
 import 'package:solar_monitoring/features/monitoring/presentation/solar_generation_monitoring_screen.dart';
 import 'package:solar_monitoring/utils/extensions.dart';
 import 'package:solar_monitoring/utils/theme/theme_notifier.dart';
+import 'package:solar_monitoring/utils/widgets/date_picker.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -110,19 +111,33 @@ class DatePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    DateTime minimumDate = DateTime(2020, 1, 1, 0, 0, 0, 0, 0);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         IconButton(
           icon: const Icon(Icons.chevron_left),
-          onPressed: () => ref.read(selectedDateProvider.notifier).previousDay(),
+          onPressed: !ref.watch(selectedDateProvider).isAfter(minimumDate) ? null : () => ref.read(selectedDateProvider.notifier).previousDay(),
         ),
         const SizedBox(width: 8),
-        Text(DateFormat('yyyy.MM.dd').format(ref.watch(selectedDateProvider))),
+        InkWell(
+            onTap: () async {
+              DateTime? selectedDateFromPicker = await CustomDatePicker(
+                context: context,
+                minimumDate: minimumDate,
+                maximumDate: DateTime.now(),
+                preSelectedDate: ref.watch(selectedDateProvider),
+              ).openDatePicker();
+
+              if (selectedDateFromPicker != null) {
+                ref.read(selectedDateProvider.notifier).updateDay(selectedDateFromPicker);
+              }
+            },
+            child: Text(DateFormat('yyyy.MM.dd').format(ref.watch(selectedDateProvider)))),
         const SizedBox(width: 8),
         IconButton(
           icon: const Icon(Icons.chevron_right),
-          onPressed: ref.watch(selectedDateProvider).canNotGetTomorrowData ? null : () => ref.read(selectedDateProvider.notifier).nextDay(),
+          onPressed: ref.watch(selectedDateProvider).canNotGetNextDayData ? null : () => ref.read(selectedDateProvider.notifier).nextDay(),
           disabledColor: Colors.grey,
         ),
       ],

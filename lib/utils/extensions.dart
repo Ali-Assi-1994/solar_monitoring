@@ -21,7 +21,7 @@ extension WattConversion on List<FlSpot> {
 }
 
 extension DateRestrictionOnSolarDataFilter on DateTime {
-  bool get canNotGetTomorrowData => year == DateTime.now().year && month == DateTime.now().month && day == DateTime.now().day;
+  bool get canNotGetNextDayData => year == DateTime.now().year && month == DateTime.now().month && day == DateTime.now().day;
 }
 
 extension ConvertMonitoringModelToFlSpot on List<MonitoringModel> {
