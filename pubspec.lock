@@ -211,6 +211,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.15.0"
+  mocktail:
+    dependency: "direct main"
+    description:
+      name: mocktail
+      sha256: "890df3f9688106f25755f26b1c60589a92b3ab91a22b8b224947ad041bf172d8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   path:
     dependency: transitive
     description:
@@ -227,14 +235,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.6.1"
-  rolling_switch:
-    dependency: "direct main"
-    description:
-      name: rolling_switch
-      sha256: "28e6434d05ee135362847e6cb37f2861d724e52ad400914f8a4ef3e4935cb8dd"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.2"
   sky_engine:
     dependency: transitive
     description: flutter

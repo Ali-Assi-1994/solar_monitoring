@@ -27,13 +27,9 @@ class BatteryConsumptionMonitoringScreen extends ConsumerWidget {
                 RefreshIndicator(
                   onRefresh: () => ref.refresh(monitoringDataProvider(MonitoringFilter(filter: MonitoringType.battery, timestamp: ref.watch(selectedDateProvider))).future),
                   child: SingleChildScrollView(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      child: LineChartWidget(
-                        data: data,
-                        // gradientColor1: Color(0xFFE80054),
-                        // gradientColor2: Color(0xFFFF3AF2),
-                        // gradientColor3: Color(0xFFE91E63),
-                      )),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: LineChartWidget(data: data),
+                  ),
                 )
               ],
             );

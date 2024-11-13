@@ -28,12 +28,7 @@ class SolarGenerationMonitoringScreen extends ConsumerWidget {
                   onRefresh: () => ref.refresh(monitoringDataProvider(MonitoringFilter(filter: MonitoringType.solar, timestamp: ref.watch(selectedDateProvider))).future),
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: LineChartWidget(
-                      data: data,
-                      // gradientColor1: Color(0xFFFFC107),
-                      // gradientColor2: Color(0xFFFFA000),
-                      // gradientColor3: Color(0xFFFFD740),
-                    ),
+                    child: LineChartWidget(data: data),
                   ),
                 )
               ],

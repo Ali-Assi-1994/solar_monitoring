@@ -115,13 +115,7 @@ class LineChartWidget extends ConsumerWidget {
                       sideTitles: SideTitles(showTitles: false),
                     ),
                   ),
-                  gridData: FlGridData(
-                    show: false,
-                    drawHorizontalLine: true,
-                    drawVerticalLine: true,
-                    checkToShowHorizontalLine: (value) => value % 1 == 0,
-                    checkToShowVerticalLine: (value) => value % 1 == 0,
-                  ),
+                  gridData: const FlGridData(show: false),
                   borderData: FlBorderData(
                     show: true,
                     border: const Border(

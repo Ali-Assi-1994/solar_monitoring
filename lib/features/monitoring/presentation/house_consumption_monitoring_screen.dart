@@ -28,12 +28,7 @@ class HouseConsumptionMonitoringScreen extends ConsumerWidget {
                   onRefresh: () => ref.refresh(monitoringDataProvider(MonitoringFilter(filter: MonitoringType.house, timestamp: ref.watch(selectedDateProvider))).future),
                   child: SingleChildScrollView(
                     physics: const AlwaysScrollableScrollPhysics(),
-                    child: LineChartWidget(
-                      data: data,
-                      // gradientColor1: Color(0xFF2196F3),
-                      // gradientColor2: Color(0xFF64B5F6),
-                      // gradientColor3: Color(0xFF1976D2),
-                    ),
+                    child: LineChartWidget(data: data),
                   ),
                 )
               ],
