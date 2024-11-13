@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:solar_monitoring/features/home_screen/presentation/home_screen.dart';
+import 'package:solar_monitoring/features/home_screen/presentation/home_widgets.dart';
 import 'package:solar_monitoring/features/monitoring/data/monitoring_repository.dart';
 
 import '../mocks/monitoring_repository_mock.dart';
