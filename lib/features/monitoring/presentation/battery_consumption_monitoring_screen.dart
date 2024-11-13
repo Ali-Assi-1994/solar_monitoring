@@ -22,16 +22,18 @@ class BatteryConsumptionMonitoringScreen extends ConsumerWidget {
         )
         .when(
           data: (data) {
-            return Column(
-              children: [
-                RefreshIndicator(
-                  onRefresh: () => ref.refresh(monitoringDataProvider(MonitoringFilter(filter: MonitoringType.battery, timestamp: ref.watch(selectedDateProvider))).future),
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    child: LineChartWidget(data: data),
-                  ),
-                )
-              ],
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  RefreshIndicator(
+                    onRefresh: () => ref.refresh(monitoringDataProvider(MonitoringFilter(filter: MonitoringType.battery, timestamp: ref.watch(selectedDateProvider))).future),
+                    child: SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: LineChartWidget(data: data),
+                    ),
+                  )
+                ],
+              ),
             );
           },
           error: (error, __) {

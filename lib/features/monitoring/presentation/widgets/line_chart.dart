@@ -60,7 +60,7 @@ class LineChartWidget extends ConsumerWidget {
         AspectRatio(
           aspectRatio: (MediaQuery.sizeOf(context).width * 2.5) / MediaQuery.sizeOf(context).height,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            padding: const EdgeInsets.only(right: 24, top: 24, left: 8),
             child: LayoutBuilder(builder: (context, constraints) {
               return LineChart(
                 LineChartData(
