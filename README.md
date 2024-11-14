@@ -12,7 +12,9 @@
 1. Make sure Docker is running and the API is accessible at `http://localhost:3000`.
 2. Clone this repository and open the project in your preferred IDE.
 3. The environment is pre-configured to run on both iOS and Android platforms.
-   - Tested on simulators: **iPhone 15 Pro Max (iOS 17.5)**
+   - Tested on simulators: 
+      **iPhone 16 Pro Max (iOS 18.1)**
+      **iPhone 15 Pro Max (iOS 17.5)**
 4. If you need to change the API's base URL, update the `BASE_URL` in the `api_client.dart` file.
 
 ## Features
