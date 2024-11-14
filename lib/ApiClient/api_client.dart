@@ -9,16 +9,14 @@ import 'package:solar_monitoring/utils/widgets/app_snackbar.dart';
 
 import 'api.dart';
 
-final dioProvider = Provider((ref) => ApiClient(ref));
+final dioProvider = Provider((ref) => ApiClient(Dio()));
 
 class ApiClient {
-  final Ref ref;
+  Dio dio;
 
-  ApiClient(this.ref) {
+  ApiClient(this.dio) {
     initDio();
   }
-
-  late Dio _dio;
 
   initDio() {
     BaseOptions options = BaseOptions(
@@ -33,7 +31,7 @@ class ApiClient {
       },
     );
 
-    _dio = Dio(options);
+    dio = Dio(options);
     if (kDebugMode) {
       void debugPrint(Object object) {
         assert(() {
@@ -42,7 +40,7 @@ class ApiClient {
         }());
       }
 
-      _dio.interceptors.add(
+      dio.interceptors.add(
         LogInterceptor(
           request: true,
           responseBody: true,
@@ -56,29 +54,6 @@ class ApiClient {
     }
   }
 
-  /// post methods is not used in this project, but added as an example
-  Future<ApiResult> post({
-    required String url,
-    var data,
-    StreamController<double>? uploadingStream,
-    CancelToken? cancelToken,
-  }) async {
-    try {
-      final response = await _dio.post(_dio.options.baseUrl + url, data: data, onSendProgress: (rcv, total) {
-        if (uploadingStream != null) {
-          uploadingStream.sink.add((rcv / total));
-        }
-      }, cancelToken: cancelToken).timeout(const Duration(minutes: 15));
-      if (response.statusCode == 200) {
-        return ApiResult.success(response.data);
-      } else {
-        return ApiResult.failure(response.data);
-      }
-    } catch (e) {
-      return ApiResult.failure(NetworkExceptions.getErrorMessage(e));
-    }
-  }
-
   Future<ApiResult> get({
     required String url,
     Options? options,
@@ -86,13 +61,18 @@ class ApiClient {
     CancelToken? cancelToken,
   }) async {
     try {
-      final response = await _dio
+      final response = await dio
           .get(
-            _dio.options.baseUrl + url,
+            dio.options.baseUrl + url,
             queryParameters: queryParameters,
             cancelToken: cancelToken,
           )
           .timeout(const Duration(seconds: 15));
+
+      // Add debug logs
+      // debugPrint('Response statusCode: ${response.statusCode}');
+      // debugPrint('Response data: ${response.data}');
+
       if (response.statusCode == 200) {
         return ApiResult.success(response.data);
       } else {
